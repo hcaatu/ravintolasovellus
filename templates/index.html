@@ -1,0 +1,41 @@
+<p>
+    {% if session.username %}
+    {{ session.username  }} kirjautuneena<br>
+    <a href="/logout">Kirjaudu ulos</a><br>
+    <a href="/personal">Omat arviot</a>
+    {% else %}
+    <form action="/login" method="POST">
+        <p>Käyttäjänimi:<br>
+            <input type="text" name="username">
+        </p>
+        <p>
+            Salasana:<br>
+            <input type="text" name="password">
+        </p>
+        <input type="submit" value="Kirjaudu sisään">
+        <p>
+            Ei käyttäjää?<br>
+            <a href="/register">Rekisteröi uusi käyttäjä</a>
+        </p>
+    </form>
+    {% endif %}
+</p>
+
+<p>
+    <form action="/result" method="GET">
+        Etsi arvioita: <input type="text" name="query">
+        <br>
+        <input type="submit" value="Hae">
+    </form>
+</p>
+
+<a href="/new">Lisää mesta</a><br>
+Mestojen määrä: {{ count }}
+<hr>
+{% for resto in restos %}
+{{ resto.name }} <br>
+Sijainti: {{ resto.location }} <br>
+Lisätty: {{ resto.created_at.strftime("%Y-%m-%d %H:%M:%S") }} <br>
+<a href="/restaurant/{{resto.id}}">Näytä arviot</a> <br>
+<hr>
+{% endfor %}

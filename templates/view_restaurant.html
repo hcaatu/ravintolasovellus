@@ -1,0 +1,41 @@
+<p>
+    {% if session.username %}
+    {{ session.username  }} kirjautuneena<br>
+    <a href="/logout">Kirjaudu ulos</a>
+    {% else %}
+    <form action="/login" method="POST">
+        <p>Käyttäjänimi:<br>
+            <input type="text" name="username">
+        </p>
+        <p>
+            Salasana:<br>
+            <input type="text" name="password">
+        </p>
+        <input type="submit" value="Kirjaudu sisään">
+        <p>
+            Ei käyttäjää?<br>
+            <a href="/register">Rekisteröi uusi käyttäjä</a>
+        </p>
+    </form>
+    {% endif %}
+</p>
+
+<p>{{ name }}<br>
+Sijainti: {{ location }}
+</p>
+<hr>
+{% for review in reviews %}
+{% if review.visible %}
+    {{ review.content }}<br>
+    <br>
+    Lähettäjä: {{ review.sent_by }}<br>
+    Lähetetty: {{ review.sent_at.strftime("%Y-%m-%d %H:%M:%S") }}<br>
+    <hr>
+{% endif %}
+{% endfor %}
+{% if session.username %}
+    <a href="/restaurant/{{ id }}/review">Anna uusi arvio</a> <br>
+{% else %}
+    Kirjaudu sisään antaaksesi arvion<br>
+{% endif %}
+<a href="/">Mene takaisin</a>

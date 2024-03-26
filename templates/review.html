@@ -1,0 +1,32 @@
+<p>
+    {% if session.username %}
+    {{ session.username  }} kirjautuneena<br>
+    <a href="/logout">Kirjaudu ulos</a>
+    {% else %}
+    <form action="/login" method="POST">
+        <p>Käyttäjänimi:<br>
+            <input type="text" name="username">
+        </p>
+        <p>
+            Salasana:<br>
+            <input type="text" name="password">
+        </p>
+        <input type="submit" value="Kirjaudu sisään">
+        <p>
+            Ei käyttäjää?<br>
+            <a href="/register">Rekisteröi uusi käyttäjä</a>
+        </p>
+    </form>
+    {% endif %}
+</p>
+
+<form action="/create_review/{{ id }}", method="POST">
+    <p>
+        {{ name }}
+    </p>
+    <p>
+        Kirjoita arvostelu: <br>
+        <input type="text" name="content">
+    </p>
+    <input type="submit" value="Lähetä arvostelu">
+</form>
