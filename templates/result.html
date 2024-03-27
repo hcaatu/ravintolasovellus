@@ -23,11 +23,13 @@
 <p>
     {% if reviews %}
         {% for review in reviews %}
+        {% if review.visible %}
         
         {{review.name}}<br>
         {{review.content}}<br>
         <a href="/restaurant/{{ review.resto_id }}">Tarkastele ravintolaa</a>
         <hr>
+        {% endif %}
         {% endfor %}
     {% else %}
         Hakusanalla ei löytynyt arvioita.

@@ -128,3 +128,10 @@ def personal():
     result = db.session.execute(text(sql), {"username":session["username"]})
     reviews = result.fetchall()
     return render_template("personal.html", reviews=reviews)
+
+@app.route("/delete_review/<int:id>", methods=["POST"])
+def delete_review(id):
+    sql = "UPDATE reviews SET visible=FALSE WHERE reviews.id=:id"
+    db.session.execute(text(sql), {"id":id})
+    db.session.commit()
+    return redirect("/personal")
