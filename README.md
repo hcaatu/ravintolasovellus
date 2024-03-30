@@ -10,3 +10,11 @@ Tarkoituksena on luoda ominaisuuksia, kuten
 - arvion antaminen tietylle ravintolalle
 - lista- tai karttanäkymä kuppiloista
 
+## Välipalautus 2:
+- sovellukseen voi lisätä uusia ravintoloita
+- sovellukseen voi luoda uusia käyttäjiä
+- käyttäjät voivat jättää arvioita ravintoloihin
+- käyttäjät voivat poistaa arvionsa
+- arvioita voi etsiä hakusanalla
+
+Sovellus on tällä hetkellä fly.io:n palvelimella, mutta en ole saanut vielä kaikkia ongelmia ratkaistua siihen liittyen. En siis saanut palvelua toimimaan vielä tähän palautukseen saakka. Kurssin ohjeet liittyen siihen olivat ilmeisesti vanhentuneet.
