@@ -24,5 +24,8 @@ primary_region = 'ams'
 [env]
   PORT = "5000"
 
+[[services_ports]]
+  internal_port = 5000
+  
 [[services]]
   internal_port = 5000
