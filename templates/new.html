@@ -1,25 +1,7 @@
-<p>
-    {% if session.username %}
-    {{ session.username  }} kirjautuneena<br>
-    <a href="/logout">Kirjaudu ulos</a>
-    {% else %}
-    <form action="/login" method="POST">
-        <p>Käyttäjänimi:<br>
-            <input type="text" name="username">
-        </p>
-        <p>
-            Salasana:<br>
-            <input type="text" name="password">
-        </p>
-        <input type="submit" value="Kirjaudu sisään">
-        <p>
-            Ei käyttäjää?<br>
-            <a href="/register">Rekisteröi uusi käyttäjä</a>
-        </p>
-    </form>
-    {% endif %}
-</p>
+{% extends "layout.html" %}
+{% block title %}Ravintolasovellus{% endblock %}
 
+{% block content %}
 <form action="/create" method="POST">
 <p>Nimi:<br>
 <input type="text" name="name"></p>
@@ -27,3 +9,4 @@
 <input type="text" name="location"></p>
 <input type="submit" value="Lähetä">
 </form>
+{% endblock %}
