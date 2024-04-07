@@ -28,7 +28,7 @@ Sovelluksen saa kuitenkin käynnistettyä paikallisesti.
 git clone
 ```
 
-2. Hakemistoon voi siirtyä komennolla
+2. Hakemistoon voi siirtyä komennolla:
 ```bash
 cd tsoha-harjoitustyo
 ```
@@ -39,10 +39,13 @@ touch .env
 ```
 Tiedostoon tulee kirjoittaa seuraaat rivit:
 
-DATABASE_URL=<tietokannan-paikallinen-osoite>
-SECRET_KEY=<salainen-avain>
 
-johon vaihdetaan oikeat muuttujat paikalle. Salaisen avaimen saa luotua esimerkiksi juurihakemistossa komennolla 
+DATABASE_URL=*tietokannan-paikallinen-osoite*
+
+SECRET_KEY=*salainen-avain*
+
+
+johon vaihdetaan oikeat muuttujat paikalle. Salaisen avaimen saa luotua esimerkiksi juurihakemistossa komennolla:
 ```bash
 python3 secret.py
 ```
@@ -54,7 +57,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-5. Määritetään vielä sovelluksen tietokannan skeema komennolla
+5. Määritetään vielä sovelluksen tietokannan skeema komennolla:
 ```bash
 psql < schema.sql
 ```
