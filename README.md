@@ -30,7 +30,7 @@ git clone
 
 2. Hakemistoon voi siirtyä komennolla:
 ```bash
-cd tsoha-harjoitustyo
+cd ravintolasovellus
 ```
 
 3. Luo kansioon .env tiedosto
