@@ -1,3 +1,8 @@
+{% if session.passwords_differ %}
+Salasanat eroavat toisistaan. Yritä uudelleen
+{% elif session.username_in_use %}
+Käyttäjänimi on jo käytössä. Yritä uudelleen
+{% endif %}
 <form action="/register" method="POST">
     <p>
         Käyttäjänimi: <br>
@@ -13,3 +18,4 @@
     </p>
     <input type="submit" name="Rekisteröidy">
 </form>
+<a href="/">Mene takaisin</a>

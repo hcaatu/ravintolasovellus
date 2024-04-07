@@ -18,11 +18,14 @@ def register():
         password = request.form["password"]
         password_again = request.form["password_again"]
         if password != password_again:
-            return redirect("/")
-        # todo error message
+            session["passwords_differ"] = True
+            return redirect("/register")
         if visits.register_new(username, password):
+            session["passwords_differ"] = False
+            session["username_in_use"] = False
             return redirect("/")
         else:
+            session["username_in_use"] = True
             return redirect("/register")
 
 @app.route("/login", methods=["POST"])
@@ -82,14 +85,6 @@ def create_review(id):
 
 @app.route("/result")
 def result():
-    """Handles the search result content page.
-
-    Uses the built-in lower-fuction to work as a case insensitive search.
-    Joins the restaurant name using the id found in the review table.
-
-    Returns:
-        str: The rendered html page with searched results.
-    """
     query = request.args["query"]
     reviews = visits.fetch_reviews(query)
     print(reviews)
