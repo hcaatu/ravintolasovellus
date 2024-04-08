@@ -3,7 +3,7 @@ Salasanat eroavat toisistaan. Yritä uudelleen
 {% elif session.username_in_use %}
 Käyttäjänimi on jo käytössä. Yritä uudelleen
 {% endif %}
-<form action="/register" method="POST">
+<form action="/register" method="POST", onsubmit="return check(this)">
     <p>
         Käyttäjänimi: <br>
         <input type="text" name="username">
@@ -19,3 +19,13 @@ Käyttäjänimi on jo käytössä. Yritä uudelleen
     <input type="submit" name="Rekisteröidy">
 </form>
 <a href="/">Mene takaisin</a>
+
+<script>
+    function check(form) {
+        if (form.password.value != form.password_again.value) {
+            alert("Salasanat eroavat toisistaan. Yritä uudelleen");
+            return false;
+        }
+        return true;
+    }
+</script>
