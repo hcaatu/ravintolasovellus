@@ -1,8 +1,13 @@
-from flask import redirect, render_template, request, session
-from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import check_password_hash, generate_password_hash
+from flask import redirect, render_template, abort, request, session
+from werkzeug.security import check_password_hash
+from secrets import token_hex
 from app import app
 import visits
+
+
+def check_user():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return abort(403)
 
 @app.route("/")
 def index():
@@ -42,6 +47,7 @@ def login():
         if check_password_hash(hash, password):
             session["username"] = username
             session["invalid_user"] = False
+            session["csrf_token"] = token_hex(16)
         else:
             session["invalid_user"] = True
             return redirect(request.referrer)
@@ -51,6 +57,7 @@ def login():
 def logout():
     del session["username"]
     del session["invalid_user"]
+    del session["csrf_token"]
     return redirect("/")
 
 @app.route("/new")
@@ -62,6 +69,7 @@ def create():
     name = request.form["name"]
     location = request.form["location"]
     visits.create_resto(name, location)
+    check_user()
     return redirect("/")
 
 @app.route("/restaurant/<int:id>")
@@ -81,22 +89,27 @@ def review(id):
 def create_review(id):
     if session["username"]:
         visits.create_review(id, request.form["content"], session["username"])
+    check_user()
     return redirect(f"/restaurant/{id}")
 
 @app.route("/result")
 def result():
     query = request.args["query"]
     reviews = visits.fetch_reviews(query)
-    print(reviews)
     return render_template("result.html", reviews=reviews)
 
 @app.route("/personal")
 def personal():
     reviews = visits.fetch_reviews_by_user(session["username"])
-    print(reviews)
-    return render_template("personal.html", reviews=reviews)
+    visible = False
+    for review in reviews:
+        if review.visible == True:
+            visible = True
+            break
+    return render_template("personal.html", reviews=reviews, visible=visible)
 
 @app.route("/delete_review/<int:id>", methods=["POST"])
 def delete_review(id):
     visits.delete_review(id)
+    print(id)
     return redirect("/personal")

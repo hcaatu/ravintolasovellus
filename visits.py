@@ -50,12 +50,12 @@ def create_review(id, content, username):
     db.session.commit()
 
 def fetch_reviews(query):
-    sql = "SELECT * FROM reviews JOIN restos ON reviews.resto_id = restos.id WHERE lower(content) LIKE lower(:query)"
+    sql = "SELECT * FROM reviews JOIN restos ON reviews.resto_id = restos.id WHERE lower(content) LIKE lower(:query) OR lower(restos.name) LIKE lower(:query)"
     result = db.session.execute(text(sql), {"query":"%"+query+"%"})
     return result.fetchall()
 
 def fetch_reviews_by_user(name):
-    sql = "SELECT * FROM reviews WHERE reviews.sent_by=:username"
+    sql = "SELECT reviews.id, reviews.resto_id, reviews.content, reviews.visible, restos.name FROM reviews, restos WHERE reviews.sent_by=:username AND reviews.visible AND reviews.resto_id=restos.id"
     result = db.session.execute(text(sql), {"username":name})
     return result.fetchall()
 

@@ -8,6 +8,7 @@
 <p>Sijainti:<br>
 <input type="text" name="location"></p>
 <input type="submit" value="Lähetä">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <a href="/">Mene takaisin</a>
 {% endblock %}

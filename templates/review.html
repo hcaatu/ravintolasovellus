@@ -2,7 +2,7 @@
 {% block title %}Ravintolasovellus{% endblock %}
 
 {% block content %}
-<form action="/create_review/{{ id }}", method="POST" onsubmit="return check(this)">
+<form action="/create_review/{{ id }}", method="POST", onsubmit="return check(this)">
     <p>
         {{ name }}
     </p>
@@ -11,6 +11,7 @@
         <textarea name="content"></textarea>
     </p>
     <input type="submit" value="Lähetä arvostelu">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <a href="/">Mene takaisin</a>
 

@@ -3,19 +3,21 @@
 
 {% block content %}
 <p>
-    {% if reviews %}
+    {% if visible %}
+        <hr>
         {% for review in reviews %}
-        {% if review.visible %}
         
-        {{review.name}}<br>
-        {{review.content}}<br>
-        <br>
-        <a href="/restaurant/{{ review.resto_id }}">Tarkastele ravintolaa</a><br>
-        <form action="/delete_review/{{ review.id }}" method="POST">
-            <input type="submit" value="Poista arvio">
+            {{review.name}}<br>
+            <br>
+            {{review.content}}<br>
+            <br>
+            <a href="/restaurant/{{ review.resto_id }}">Tarkastele ravintolaa</a><br>
+            <br>
+            <form action="/delete_review/{{ review.id }}" method="POST">
+                <input type="submit" value="Poista arvio">
         </form>
         <hr>
-        {% endif %}
+        
         {% endfor %}
     {% else %}
         Et ole antanut arvioita.
