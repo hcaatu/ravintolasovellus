@@ -2,22 +2,31 @@
 {% block title %}Ravintolasovellus{% endblock %}
 
 {% block content %}
-<p>
-    <form action="/result" method="GET">
-        Etsi arvioita: <input type="text" name="query">
-        <br>
-        <input type="submit" value="Hae">
-    </form>
-</p>
 
-<a href="/new">Lisää mesta</a><br>
-Mestojen määrä: {{ count }}
-<hr>
-{% for resto in restos %}
-{{ resto.name }} <br>
-Sijainti: {{ resto.location }} <br>
-Lisätty: {{ resto.created_at.strftime("%Y-%m-%d %H:%M:%S") }} <br>
-<a href="/restaurant/{{resto.id}}">Näytä arviot</a> <br>
-<hr>
-{% endfor %}
+{% if session.registration_successful %}
+Käyttäjän luominen onnistui!
+{% endif %}
+
+<div class="search">
+    <form action="/result" method="GET">
+        <label for="query">Etsi arvioita:</label>
+        <input id="query" type="text" name="query">
+        <input id="query-button" type="submit" value="Hae">
+    </form>
+</div>
+
+<div id="add-new">
+    <a href="/new">Lisää ravintola</a><br>
+    Ravintoloiden määrä: {{ count }}
+</div>
+
+<div class="resto-list">
+    {% for resto in restos %}
+    {{ resto.name }} <br>
+    Sijainti: {{ resto.location }} <br>
+    Lisätty: {{ resto.created_at.strftime("%Y-%m-%d %H:%M:%S") }} <br>
+    <a href="/restaurant/{{resto.id}}">Näytä arviot</a> <br>
+    <hr>
+    {% endfor %}
+</div>
 {% endblock %}

@@ -1,32 +1,40 @@
 <!doctype html>
-<title>Ravintolasovellus - {% block title %}{% endblock %}</title>
-<h1>Ravintolasovellus</h1>
-<p>
-    {% if session.username %}
-    {{ session.username  }} kirjautuneena<br>
-    <a href="/logout">Kirjaudu ulos</a><br>
-    <a href="/personal">Omat arviot</a>
-    
-    {% else %}
-    <form action="/login" method="POST">
-        <p>Käyttäjänimi:<br>
-            <input type="text" name="username">
-        </p>
-        <p>
-            Salasana:<br>
-            <input type="password" name="password">
-        </p>
-        <input type="submit" value="Kirjaudu sisään">
-        <br>
-        {% if session.invalid_user %}
-        <br>Väärä käyttäjänimi tai salasana<br>
-        {% endif %}
-        <p>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+
+<body>
+    <title>Ravintolasovellus - {% block title %}{% endblock %}</title>
+
+    <div class="header">
+        <h1>Ravintolasovellus</h1>
+    </div>
+
+    <div class="content">
+
+        <div id="login">
+            {% if session.username %}
+            {{ session.username  }} kirjautuneena<br>
+            <a href="/logout">Kirjaudu ulos</a><br>
+            <a href="/personal">Omat arviot</a>
+        
+            {% else %}
+            <form action="/login" method="POST">
+                <label for="username">Käyttäjänimi:</label>
+                <input id="login" type="text" name="username">
+                <label for="password">Salasana:</label>
+                <input id="login" type="password" name="password">
+                <input id="login-button" type="submit" value="Kirjaudu sisään">
+            <br>
+            {% if session.invalid_user %}
+            <br>Väärä käyttäjänimi tai salasana<br>
+            {% endif %}
             Ei käyttäjää?<br>
             <a href="/register">Rekisteröi uusi käyttäjä</a>
-        </p>
-    </form>
-    {% endif %}
-</p>
+            {% endif %}
+            </form>
+        </div>
 
-{% block content %}{% endblock %}
+        {% block content %}{% endblock %}
+
+    </div>
+</body>

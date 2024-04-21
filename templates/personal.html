@@ -2,26 +2,26 @@
 {% block title %}Ravintolasovellus{% endblock %}
 
 {% block content %}
-<p>
+<div>
     {% if visible %}
         <hr>
         {% for review in reviews %}
-        
+        <h3>
             {{review.name}}<br>
-            <br>
+        </h3>
             {{review.content}}<br>
             <br>
             <a href="/restaurant/{{ review.resto_id }}">Tarkastele ravintolaa</a><br>
             <br>
             <form action="/delete_review/{{ review.id }}" method="POST">
                 <input type="submit" value="Poista arvio">
-        </form>
+            </form>
         <hr>
         
         {% endfor %}
     {% else %}
         Et ole antanut arvioita.
     {% endif %}
-</p> 
+</div> 
 <a href="/">Mene takaisin</a>
 {% endblock %}

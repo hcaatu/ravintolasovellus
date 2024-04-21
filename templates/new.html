@@ -2,13 +2,16 @@
 {% block title %}Ravintolasovellus{% endblock %}
 
 {% block content %}
-<form action="/create" method="POST">
-<p>Nimi:<br>
-<input type="text" name="name"></p>
-<p>Sijainti:<br>
-<input type="text" name="location"></p>
-<input type="submit" value="Lähetä">
-<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+<form id="create-new" action="/create" method="POST">
+    <label for=name>Nimi:</label>
+    <input type="text" name="name" required>
+    <label for=location>Sijainti:</label>
+    <input type="text" name="location" required>
+    <input type="submit" value="Lähetä">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
-<a href="/">Mene takaisin</a>
+<div id="back">
+    <a href="/">Mene takaisin</a>
+</div>
 {% endblock %}

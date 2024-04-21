@@ -1,0 +1,71 @@
+body {
+    margin: auto;
+    max-width: 45em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background: gainsboro;
+
+}
+
+.header {
+    background: skyblue;
+    font-size: x-large;
+    font-weight: bold;
+    padding: 2em 1em;
+    border-radius: .5em;
+    margin-bottom: .5em;
+}
+
+.resto-list {
+    display: block;
+    float: left;
+    padding: .5em;
+}
+
+#add-new {
+    display: block;
+    float: left;
+    padding: .5em;
+}
+
+#create-new {
+    display: grid;
+    float: left;
+    padding: .5em;
+}
+
+.search {
+    display: block;
+    float: left;
+    padding: .5em;
+}
+
+form {
+    display: grid;
+    padding: .5em;
+    background: skyblue;
+    row-gap: .3em;
+}
+
+form #login-button {
+    grid-column-start: 1;
+}
+
+#login {
+    display: grid;
+    float: right;
+    padding: .3em;
+}
+
+.content {
+    background: whitesmoke;
+    margin: auto;
+    height: auto;
+    padding: 1.5em 2em;
+    border-radius: .5em;
+    overflow: auto;
+}
+
+#back {
+    float: left;
+    display: contents;
+}

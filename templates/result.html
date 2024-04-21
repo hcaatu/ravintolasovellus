@@ -2,7 +2,7 @@
 {% block title %}Ravintolasovellus{% endblock %}
 
 {% block content %}
-<p>
+<div>
     {% if reviews %}
         {% for review in reviews %}
             {% if review.visible %}
@@ -15,13 +15,13 @@
     {% else %}
         Hakusanalla ei löytynyt arvioita.
     {% endif %}
-</p>
-<p>
+</div>
+<div>
     <form action="/result" method="GET">
         Etsi arvioita: <input type="text" name="query">
         <br>
         <input type="submit" value="Hae">
     </form>
-</p>
+</div>
 <a href="/">Mene takaisin</a>
 {% endblock %}

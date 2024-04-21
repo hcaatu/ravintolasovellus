@@ -2,9 +2,14 @@
 {% block title %}Ravintolasovellus{% endblock %}
 
 {% block content %}
-<p>{{ name }}<br>
-Sijainti: {{ location }}
-</p>
+<div>
+    <h2>
+        {{ name }}
+    </h2>
+    <h3>
+        Sijainti: {{ location }}
+    </h3>
+</div>
 <hr>
 {% for review in reviews %}
 {% if review.visible %}

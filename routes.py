@@ -8,9 +8,15 @@ import visits
 def check_user():
     if session["csrf_token"] != request.form["csrf_token"]:
         return abort(403)
+    
+def clear_error_messages():
+    session["passwords_differ"] = False
+    session["username_in_use"] = False
+    session["registration_successful"] = False
 
 @app.route("/")
 def index():
+    clear_error_messages()
     restos = visits.get_restos()
     return render_template("index.html", count=len(restos), restos=restos)
 
@@ -26,10 +32,10 @@ def register():
             session["passwords_differ"] = True
             return redirect("/register")
         if visits.register_new(username, password):
-            session["passwords_differ"] = False
-            session["username_in_use"] = False
+            clear_error_messages()
+            session["registration_successful"] = True
             return redirect("/")
-        else:
+        elif not visits.register_new(username, password):
             session["username_in_use"] = True
             return redirect("/register")
 

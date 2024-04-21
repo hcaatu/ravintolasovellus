@@ -3,14 +3,14 @@
 
 {% block content %}
 <form action="/create_review/{{ id }}", method="POST", onsubmit="return check(this)">
-    <p>
+    <div>
         {{ name }}
-    </p>
-    <p>
-        Kirjoita arvostelu: <br>
-        <textarea name="content"></textarea>
-    </p>
-    <input type="submit" value="Lähetä arvostelu">
+    </div>
+    <div>
+        <label for="content">Kirjoita arvostelu:</label>
+        <textarea name="content" required></textarea><br>
+    </div>
+    <input type="submit" value="Lähetä arvostelu"1>
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <a href="/">Mene takaisin</a>
