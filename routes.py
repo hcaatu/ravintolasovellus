@@ -6,7 +6,10 @@ import visits
 
 
 def check_user():
-    if session["csrf_token"] != request.form["csrf_token"]:
+    try:
+        if session["csrf_token"] != request.form["csrf_token"]:
+            return abort(403)
+    except KeyError:
         return abort(403)
     
 def clear_error_messages():
@@ -51,6 +54,7 @@ def login():
     else:
         hash = user.password
         if check_password_hash(hash, password):
+            session["user_id"] = user.id
             session["username"] = username
             session["invalid_user"] = False
             session["csrf_token"] = token_hex(16)
@@ -61,6 +65,7 @@ def login():
 
 @app.route("/logout")
 def logout():
+    del session["user_id"]
     del session["username"]
     del session["invalid_user"]
     del session["csrf_token"]
@@ -72,10 +77,10 @@ def new():
 
 @app.route("/create", methods=["POST"])
 def create():
+    check_user()
     name = request.form["name"]
     location = request.form["location"]
     visits.create_resto(name, location)
-    check_user()
     return redirect("/")
 
 @app.route("/restaurant/<int:id>")
@@ -83,8 +88,11 @@ def restaurant(id):
     resto = visits.view_resto(id)
     name = resto[0]
     location = resto[1]
+    print(location)
     reviews = resto[2]
-    return render_template("view_restaurant.html", id=id, name=name, location=location, reviews=reviews)
+    google_location = str(location).replace(" ", "+")
+    print(google_location)
+    return render_template("view_restaurant.html", id=id, name=name, location=location, reviews=reviews, google_location=google_location)
 
 @app.route("/restaurant/<int:id>/review")
 def review(id):
@@ -93,9 +101,9 @@ def review(id):
 
 @app.route("/create_review/<int:id>", methods=["POST"])
 def create_review(id):
+    check_user()
     if session["username"]:
         visits.create_review(id, request.form["content"], session["username"])
-    check_user()
     return redirect(f"/restaurant/{id}")
 
 @app.route("/result")
@@ -105,17 +113,38 @@ def result():
     return render_template("result.html", reviews=reviews)
 
 @app.route("/personal")
-def personal():
+def personal(id=None):
+    friends = visits.fetch_friends_by_user(session["user_id"])
     reviews = visits.fetch_reviews_by_user(session["username"])
     visible = False
     for review in reviews:
         if review.visible == True:
             visible = True
             break
-    return render_template("personal.html", reviews=reviews, visible=visible)
+    return render_template("personal.html", friends=friends, reviews=reviews, visible=visible)
 
 @app.route("/delete_review/<int:id>", methods=["POST"])
 def delete_review(id):
     visits.delete_review(id)
     print(id)
+    return redirect("/personal")
+
+@app.route("/users", methods=["GET"])
+def users():
+    check_user()
+    query = request.args["query"]
+    users = visits.get_users_by_query(query)
+    print(users)
+    return render_template("users.html", users=users)
+
+@app.route("/users/<int:id>", methods=["POST"])
+def friend_request(id):
+    check_user()
+    visits.add_friend_request(session["user_id"], id)
+    return redirect("/users")
+
+@app.route("/accept_friend/<int:id>", methods=["POST"])
+def accept_friend(id):
+    check_user()
+    visits.accept_friend(id)
     return redirect("/personal")

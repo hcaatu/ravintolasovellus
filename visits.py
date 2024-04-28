@@ -63,3 +63,23 @@ def delete_review(id):
     sql = "UPDATE reviews SET visible=FALSE WHERE reviews.id=:id"
     db.session.execute(text(sql), {"id":id})
     db.session.commit()
+
+def get_users_by_query(query):
+    sql = "SELECT (id, username) FROM users WHERE lower(username) LIKE lower(:query)"
+    users = db.session.execute(text(sql), {"query":"%"+query+"%"})
+    return users.fetchall()
+
+def add_friend_request(user1_id, user2_id):
+    sql = "INSERT INTO friends (user1_id, user2_id, accepted, visible) VALUES (:user1_id, :user2_id, TRUE, TRUE)"
+    db.session.execute(text(sql), {"user1_id":user1_id, "user2_id":user2_id})
+    db.session.commit()
+
+def fetch_friends_by_user(id):
+    sql = "SELECT * FROM friends WHERE user2_id=:id"
+    result = db.session.execute(text(sql), {"id":id})
+    return result.fetchall()
+
+def accept_friend(id):
+    sql = "UPDATE friends SET accepted=TRUE WHERE friends.id=:id"
+    db.session.execute(text(sql), {"id":id})
+    db.session.commit()

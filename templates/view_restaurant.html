@@ -9,6 +9,17 @@
     <h3>
         Sijainti: {{ location }}
     </h3>
+    <div class="map">
+        <iframe
+            class="map-top"
+            width="450"
+            height="250"
+            frameborder="0" style="border:0"
+            referrerpolicy="no-referrer-when-downgrade"
+            async src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCpfsCI7qIc-FgBxn3TpXC5FVY51FsUZDg&q={{ google_location }}"
+            allowfullscreen>
+        </iframe>
+    </div>
 </div>
 <hr>
 {% for review in reviews %}
@@ -25,7 +36,8 @@
 {% else %}
     Kirjaudu sisään antaaksesi arvion<br>
 {% endif %}
+
+
+
 <a href="/">Mene takaisin</a>
 {% endblock %}
-
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.375370936258!2d24.957614077401068!3d60.18590154216386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4692097ef6a6aaab%3A0xbf0ef96422c5ae98!2sM%C3%A4kikupla!5e0!3m2!1sen!2sfi!4v1713273965090!5m2!1sen!2sfi" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>

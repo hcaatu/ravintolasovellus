@@ -12,10 +12,11 @@
             {{review.content}}<br>
             <br>
             <a href="/restaurant/{{ review.resto_id }}">Tarkastele ravintolaa</a><br>
-            <br>
-            <form action="/delete_review/{{ review.id }}" method="POST">
+            <form id="delete-button" action="/delete_review/{{ review.id }}" method="POST">
                 <input type="submit" value="Poista arvio">
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             </form>
+            <br><br>
         <hr>
         
         {% endfor %}
@@ -23,5 +24,24 @@
         Et ole antanut arvioita.
     {% endif %}
 </div> 
-<a href="/">Mene takaisin</a>
+
+<div>
+    {% if friends %}
+    {% for friend in friends %}
+        {% if friend.accepted %}
+            {{ friend.name }}<hr>
+        {% else %}
+            {{ friend.name }} lähetti ystäväpyynnön
+            <form id="accept" action="accept_friend/{{ friend.id }}">
+                <input type="submit" value="Hyväksy">
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+</div>
+
+<div>
+    <a href="/">Mene takaisin</a>
+</div>
 {% endblock %}

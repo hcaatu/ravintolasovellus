@@ -1,10 +1,13 @@
 <!doctype html>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<meta name='viewport' content='width=device-width, initial-scale=1'>
+<html lang="fi">
+
+<head>
+    <title>Ravintolasovellus - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
 
 <body>
-    <title>Ravintolasovellus - {% block title %}{% endblock %}</title>
-
     <div class="header">
         <h1>Ravintolasovellus</h1>
     </div>
@@ -20,10 +23,11 @@
             {% else %}
             <form action="/login" method="POST">
                 <label for="username">Käyttäjänimi:</label>
-                <input id="login" type="text" name="username">
+                <input id="login" type="text" name="username" required>
                 <label for="password">Salasana:</label>
-                <input id="login" type="password" name="password">
+                <input id="login" type="password" name="password" required>
                 <input id="login-button" type="submit" value="Kirjaudu sisään">
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <br>
             {% if session.invalid_user %}
             <br>Väärä käyttäjänimi tai salasana<br>
@@ -38,3 +42,5 @@
 
     </div>
 </body>
+
+</html>

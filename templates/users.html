@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}Ravintolasovellus{% endblock %}
+
+{% block content %}
+<div>
+    {% if users %}
+        {% for user in users %}
+            {{ user.username }}<br>
+            <form action="/users/{{ user.id }}" method="POST">
+                <input type="submit" value="Lähetä ystäväpyyntö">
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+        {% endfor %}
+    {% else %}
+    <p>
+        Hakusanalla ei löytynyt käyttäjiä.
+    </p>
+    {% endif %}
+</div>
+
+<div class="search">
+    <form action="/users" method="GET">
+        Etsi käyttäjiä: <input type="text" name="query">
+        <br>
+        <input type="submit" value="Hae">
+    </form>
+</div>
+
+<a href="/">Mene takaisin</a>
+{% endblock %}

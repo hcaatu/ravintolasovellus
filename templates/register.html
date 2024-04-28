@@ -1,13 +1,16 @@
 {% extends "layout.html" %}
 {% block title %}Ravintolasovellus{% endblock %}
 
-{% if session.passwords_differ %}
-Salasanat eroavat toisistaan. Yritä uudelleen
-{% elif session.username_in_use %}
-Käyttäjänimi on jo käytössä. Yritä uudelleen
-{% endif %}
-
 {% block content %}
+
+<div>
+    {% if session.passwords_differ %}
+    Salasanat eroavat toisistaan. Yritä uudelleen
+    {% elif session.username_in_use %}
+    Käyttäjänimi on jo käytössä. Yritä uudelleen
+    {% endif %}
+</div>
+
 <form action="/register" method="POST", onsubmit="return check(this)">
     <div>
         <label for="username">Käyttäjänimi:</label><br>
@@ -27,7 +30,7 @@ Käyttäjänimi on jo käytössä. Yritä uudelleen
         oninvalid="this.setCustomValidity('Syötä salasana uudelleen')"
         oninput="this.setCustomValidity('')">
     </div>
-    <input type="submit" name="Rekisteröidy">
+    <input id="button" type="submit" value="Rekisteröidy">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <a href="/">Mene takaisin</a>
