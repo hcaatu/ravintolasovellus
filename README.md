@@ -10,16 +10,18 @@ Tarkoituksena on luoda ominaisuuksia, kuten
 - arvion antaminen tietylle ravintolalle
 - lista- tai karttanäkymä kuppiloista
 
-## Välipalautus 2:
+## Loppupalautus:
 - sovellukseen voi lisätä uusia ravintoloita
 - sovellukseen voi luoda uusia käyttäjiä
 - käyttäjät voivat jättää arvioita ravintoloihin
 - käyttäjät voivat poistaa arvionsa
-- arvioita voi etsiä hakusanalla
+- arvioita voi etsiä hakusanalla, joka hakee sekä sisäälön että ravintolan nimen perusteella
+- ravintolat näkyvät listalla, ja ravintolaa tarkastellessa myös kartalla
+- käyttäjiä voi kirjautumisen jälkeen hakea hakusanalla, ja lähettää ystäväpyynnön
 
-Sovellus on tällä hetkellä fly.io:n palvelimella, mutta en ole saanut vielä kaikkia ongelmia ratkaistua siihen liittyen. En siis saanut palvelua toimimaan vielä tähän palautukseen saakka. Kurssin ohjeet liittyen siihen olivat ilmeisesti vanhentuneet. 
+Ystävätoimintojen kohdalla olin kuitenkin liian kunnianhimoinen, enkä saanut kaikkia haluamani toimintoja valmiiksi loppupalautukseen mennessä. Sovelluksessa on virhe, jonka takia ystäväpyynnön hyväksyminen ei onnistu.
 
-Sovelluksen saa kuitenkin käynnistettyä paikallisesti.
+Sovelluksen saa käynnistettyä paikallisesti.
 
 ### Asennusohje
 
