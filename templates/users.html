@@ -6,8 +6,8 @@
     {% if users %}
         {% for user in users %}
             {{ user.username }}<br>
-            <form action="/users/{{ user.id }}" method="POST">
-                <input type="submit" value="Lähetä ystäväpyyntö">
+            <form class="friend-box" action="/users/{{ user.id }}" method="POST">
+                <input id="login-button" type="submit" value="Lähetä ystäväpyyntö">
                 <input type="hidden" name="user_id" value="{{ user.id }}">
                 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             </form>
@@ -21,9 +21,9 @@
 
 <div class="search">
     <form action="/users" method="GET">
-        Etsi käyttäjiä: <input type="text" name="query">
-        <br>
-        <input type="submit" value="Hae">
+        <label for="query">Etsi käyttäjiä:</label>
+        <input id="query" type="text" name="query">
+        <input id="query-button" type="submit" value="Hae">
     </form>
 </div>
 

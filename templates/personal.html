@@ -9,7 +9,7 @@
             {{ friend.username }}<hr>
         {% else %}
             {{ friend.username }} lähetti ystäväpyynnön
-            <form id="box" action="/accept_friend/{{ friend.id }}" method="POST">
+            <form id="box" action="/accept_friend/{{ friend.user2_id }}" method="POST">
                 <input id="query-button" type="submit" value="Hyväksy">
                 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                 <input type="hidden" name="user1_id" value="{{ friend.user1_id }}">

@@ -44,7 +44,7 @@ ul {
 
 .search {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     max-width: 15em;
 }
@@ -83,7 +83,7 @@ form #query-button {
 }
 
 .back {
-    max-width: 300px;
+    max-width: 100px;
     height: auto;
     padding: .5em;
     padding-left: 0%;
@@ -102,4 +102,11 @@ form #query-button {
     height: auto;
     padding: .5em;
     padding-top: 0%;
+  }
+
+  .friend-box {
+    width: 200px;
+    padding: .5em;
+    margin: .5em;
+    margin-left: 0%;
   }

@@ -11,7 +11,7 @@
     {% endif %}
 </div>
 
-<form action="/register" method="POST", onsubmit="return check(this)">
+<form class="box" action="/register" method="POST", onsubmit="return check(this)">
     <div>
         <label for="username">Käyttäjänimi:</label><br>
         <input type="text" name="username" required placeholder="Käyttäjänimi"
@@ -30,7 +30,7 @@
         oninvalid="this.setCustomValidity('Syötä salasana uudelleen')"
         oninput="this.setCustomValidity('')">
     </div>
-    <input id="button" type="submit" value="Rekisteröidy">
+    <input id="query-button" type="submit" value="Rekisteröidy">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <a href="/">Mene takaisin</a>
