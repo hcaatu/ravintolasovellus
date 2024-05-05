@@ -7,22 +7,17 @@
 Käyttäjän luominen onnistui!
 {% endif %}
 
-<div class="search">
-    {% if session.username %}
+{% if session.username %}
+<div class="box">
     <form action="/users" method="GET">
         <label for="query">Etsi käyttäjiä:</label>
         <input id="query" type="text" name="query">
         <input id="query-button" type="submit" value="Hae">
     </form>
 </div>
+{% endif %}
 
-<div id="add-new">
-    <a href="/new">Lisää ravintola</a><br>
-    Ravintoloiden määrä: {{ count }}
-    {% endif %}
-</div>
-
-<div class="search">
+<div class="box">
     <form action="/result" method="GET">
         <label for="query">Etsi arvioita:</label>
         <input id="query" type="text" name="query">
@@ -31,8 +26,9 @@ Käyttäjän luominen onnistui!
 </div>
 
 <div class="resto-list">
+    Ravintoloiden määrä: {{ count }}
     {% for resto in restos %}
-    <h2>{{ resto.name }}</h2><br>
+    <h2>{{ resto.name }}</h2>
     Sijainti: {{ resto.location }} <br>
     Lisätty: {{ resto.created_at.strftime("%Y-%m-%d %H:%M:%S") }} <br>
     <a href="/restaurant/{{resto.id}}">Näytä arviot</a> <br>

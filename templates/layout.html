@@ -16,10 +16,16 @@
 
         <div id="login">
             {% if session.username %}
-            {{ session.username  }} kirjautuneena<br>
-            <a href="/logout">Kirjaudu ulos</a><br>
-            <a href="/personal">Omat arviot</a>
-        
+            <nav>
+                
+                <ul>
+                    <li>{{ session.username  }} kirjautuneena</li>
+                    <li><a href="/personal">Omat arviot</a></li>
+                    <li><a href="/new">Lisää ravintola</a></li>
+                    <li><a href="/logout">Kirjaudu ulos</a></li>
+                </ul>
+            </nav>  
+            
             {% else %}
             <form action="/login" method="POST">
                 <label for="username">Käyttäjänimi:</label>

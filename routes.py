@@ -88,10 +88,8 @@ def restaurant(id):
     resto = visits.view_resto(id)
     name = resto[0]
     location = resto[1]
-    print(location)
     reviews = resto[2]
     google_location = str(location).replace(" ", "+")
-    print(google_location)
     return render_template("view_restaurant.html", id=id, name=name, location=location, reviews=reviews, google_location=google_location)
 
 @app.route("/restaurant/<int:id>/review")
@@ -116,6 +114,7 @@ def result():
 def personal(id=None):
     friends = visits.fetch_friends_by_user(session["user_id"])
     reviews = visits.fetch_reviews_by_user(session["username"])
+    print(friends)
     visible = False
     for review in reviews:
         if review.visible == True:
@@ -131,20 +130,27 @@ def delete_review(id):
 
 @app.route("/users", methods=["GET"])
 def users():
-    check_user()
-    query = request.args["query"]
-    users = visits.get_users_by_query(query)
-    print(users)
-    return render_template("users.html", users=users)
-
+    #check_user()
+    if request.method == "GET":
+        query = request.args["query"]
+        users = visits.get_users_by_query(query)
+        print(users)
+        for user in users:
+            print(user)
+        return render_template("users.html", users=users)
+    
 @app.route("/users/<int:id>", methods=["POST"])
 def friend_request(id):
+    print("aa")
+    print(id)
+    print(session["user_id"])
     check_user()
     visits.add_friend_request(session["user_id"], id)
-    return redirect("/users")
+    return redirect("/")
 
 @app.route("/accept_friend/<int:id>", methods=["POST"])
 def accept_friend(id):
+    print(id)
     check_user()
     visits.accept_friend(id)
     return redirect("/personal")

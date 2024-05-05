@@ -5,13 +5,14 @@
 
 <form id="create-new" action="/create" method="POST">
     <label for=name>Nimi:</label>
-    <input type="text" name="name" required>
+    <input type="text" name="name" placeholder="Ravintolan nimi" required>
     <label for=location>Sijainti:</label>
-    <input type="text" name="location" required>
+    <input type="text" name="location" placeholder="Osoite" required>
     <input type="submit" value="Lähetä">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
-<div id="back">
+
+<div class="back">
     <a href="/">Mene takaisin</a>
 </div>
 {% endblock %}

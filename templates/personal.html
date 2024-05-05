@@ -3,6 +3,24 @@
 
 {% block content %}
 <div>
+    {% if friends %}
+    {% for friend in friends %}
+        {% if friend.accepted %}
+            {{ friend.username }}<hr>
+        {% else %}
+            {{ friend.username }} lähetti ystäväpyynnön
+            <form id="box" action="/accept_friend/{{ friend.id }}" method="POST">
+                <input id="query-button" type="submit" value="Hyväksy">
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                <input type="hidden" name="user1_id" value="{{ friend.user1_id }}">
+                <input type="hidden" name="user2_id" value="{{ friend.user2_id }}">
+            </form>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+</div>
+
+<div>
     {% if visible %}
         <hr>
         {% for review in reviews %}
@@ -24,22 +42,6 @@
         Et ole antanut arvioita.
     {% endif %}
 </div> 
-
-<div>
-    {% if friends %}
-    {% for friend in friends %}
-        {% if friend.accepted %}
-            {{ friend.name }}<hr>
-        {% else %}
-            {{ friend.name }} lähetti ystäväpyynnön
-            <form id="accept" action="accept_friend/{{ friend.id }}">
-                <input type="submit" value="Hyväksy">
-                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-            </form>
-        {% endif %}
-    {% endfor %}
-    {% endif %}
-</div>
 
 <div>
     <a href="/">Mene takaisin</a>

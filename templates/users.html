@@ -8,6 +8,7 @@
             {{ user.username }}<br>
             <form action="/users/{{ user.id }}" method="POST">
                 <input type="submit" value="Lähetä ystäväpyyntö">
+                <input type="hidden" name="user_id" value="{{ user.id }}">
                 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             </form>
         {% endfor %}

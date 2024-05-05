@@ -12,8 +12,8 @@
     <div class="map">
         <iframe
             class="map-top"
-            width="450"
-            height="250"
+            width="400"
+            height="400"
             frameborder="0" style="border:0"
             referrerpolicy="no-referrer-when-downgrade"
             async src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCpfsCI7qIc-FgBxn3TpXC5FVY51FsUZDg&q={{ google_location }}"
@@ -21,23 +21,23 @@
         </iframe>
     </div>
 </div>
-<hr>
-{% for review in reviews %}
-{% if review.visible %}
-    {{ review.content }}<br>
-    <br>
-    Lähettäjä: {{ review.sent_by }}<br>
-    Lähetetty: {{ review.sent_at.strftime("%Y-%m-%d %H:%M:%S") }}<br>
-    <hr>
-{% endif %}
-{% endfor %}
+
 {% if session.username %}
     <a href="/restaurant/{{ id }}/review">Anna uusi arvio</a> <br>
 {% else %}
     Kirjaudu sisään antaaksesi arvion<br>
 {% endif %}
-
-
-
+<div>
+    <hr>
+    {% for review in reviews %}
+    {% if review.visible %}
+        {{ review.content }}<br>
+        <br>
+        Lähettäjä: {{ review.sent_by }}<br>
+        Lähetetty: {{ review.sent_at.strftime("%Y-%m-%d %H:%M:%S") }}<br>
+        <hr>
+    {% endif %}
+    {% endfor %}
+</div>
 <a href="/">Mene takaisin</a>
 {% endblock %}

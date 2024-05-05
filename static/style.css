@@ -3,7 +3,6 @@ body {
     max-width: 45em;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background: gainsboro;
-
 }
 
 .header {
@@ -19,23 +18,34 @@ body {
     display: block;
     float: left;
     padding: .5em;
+    max-width: fit-content;
 }
 
-#add-new {
+nav li {
     display: block;
-    float: left;
-    padding: .5em;
+    padding: 1em;
+    background: white;
+    border-radius: .5em;
+    margin: auto;
+    min-width: 210px
+}
+
+ul {
+    padding-left: 0%;
+    margin: 0%;
 }
 
 #create-new {
     display: grid;
     float: left;
     padding: .5em;
+    width: 250px
 }
 
 .search {
-    display: block;
-    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     max-width: 15em;
 }
 
@@ -44,14 +54,20 @@ form {
     padding: .5em;
     background: skyblue;
     row-gap: .3em;
+    border-radius: .5em;
 }
 
 form #login-button {
     grid-column-start: 1;
 }
 
+form #query-button {
+    padding: 5px;
+    width: 100px;
+}
+
 #login {
-    display: grid;
+    display: block;
     float: right;
     padding-top: 0%;
     padding-left: .3em;
@@ -66,14 +82,24 @@ form #login-button {
     overflow: auto;
 }
 
-#back {
-    float: left;
-    display: contents;
+.back {
+    max-width: 300px;
+    height: auto;
+    padding: .5em;
+    padding-left: 0%;
 }
 
 #delete-button {
     float: left;
     display: grid;
     background: none;
-    padding: 0%;
+    padding: .5em;
+    padding-left: 0%;
 }
+
+.box {
+    width: 300px;
+    height: auto;
+    padding: .5em;
+    padding-top: 0%;
+  }
